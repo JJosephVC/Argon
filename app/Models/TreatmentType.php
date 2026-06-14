@@ -14,7 +14,7 @@ class TreatmentType extends Model
         'estimated_duration'
     ];
 
-    protected $table = 'treatment_types';
+    //protected $table = 'treatment_types';
 
     public function treatment() : HasMany{
         return $this->hasMany(Treatment::class);

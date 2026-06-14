@@ -40,6 +40,34 @@
                                         <th></th>
                                     </tr>
                                 </thead>
+
+                                <tbody>
+                                    @foreach ($treatmenttypeI as $treatment_t)
+                                    <tr>
+                                        <td></td>
+                                        <td>{{ $treatment_t->id }}</td>
+                                        <td>{{ $treatment_t->name }}</td>
+                                        <td>{{ $treatment_t->description }}</td>
+                                        <td>{{ $treatment_t->base_cost }}</td>
+                                        <td>{{ $treatment_t->estimated_duration }}</td>
+                                        <td class="flex gap-4">
+                                            <a href="{{ route('treatments_types.show', $treatment_t) }}"
+                                            class="btn btn-sm">
+                                                <i class="fas fa-eye" style="color: #002FFA; font-size: 15px;"></i>
+                                            </a>
+                                            <a href="{{ route('treatments_types.edit', $treatment_t) }}"
+                                            class="btn btn-sm">
+                                                <i class="fas fa-pen" style="color: #1AFF00; font-size: 15px;"></i>
+                                            </a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <a class="btn btn-sm">
+                                                <i class="fas fa-trash" style="color: #FF0000; font-size: 15px;"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>

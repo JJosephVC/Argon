@@ -21,6 +21,6 @@ class Treatment extends Model
     }
 
     public function treatment_type() : BelongsTo{
-        return $this->belongsTo(Treatment_type::class);
+        return $this->belongsTo(TreatmentType::class);
     }
 }
