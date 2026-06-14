@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class DentistRequest extends FormRequest
 {
@@ -21,18 +22,28 @@ class DentistRequest extends FormRequest
      */
     public function rules(): array
     {
-        $dentistId = $this->route('dentist');
+        $dentist = $this->route('dentist');
 
         return [
             'name'=> 'required|string|min:3|max:50',
             'surname'=> 'required|string|min:3|max:50',
-            'email'=> 'required|string|min:5|max:150|unique:dentists,email',
-            $this->route('dentist'),
+            'email'=> [
+                'required',
+                'string',
+                'min:5',
+                'max:150',
+                Rule::unique('dentists', 'email')->ignore($dentist),
+            ],
             'phone_number'=> 'required|string|min:8|max:15',
             'description_professional'=> 'required|string|min:3|max:100',
             'speciality'=> 'required|string|min:3|max:100',
-            'license_number'=> 'required|string|min:3|max:20|unique:dentists',
-            $this->route('dentist'),
+            'license_number'=> [
+                'required',
+                'string',
+                'min:3',
+                'max:20',
+                Rule::unique('dentists', 'license_number')->ignore($dentist),
+            ],
         ];
     }
 }

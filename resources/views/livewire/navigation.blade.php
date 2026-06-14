@@ -61,6 +61,13 @@
     <h6 class="navbar-heading text-muted">Ejemplos</h6>
     <!-- Navigation -->
     <ul class="navbar-nav mb-md-3">
+        <li class="nav-item {{ Request::route()->named('dentists.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('dentists.index') ? 'active' : '' }}"
+                href="{{ route('dentists.index') }}" wire:navigate>
+                <i class="fas fa-users text-sky-700"></i> Odontólogos
+            </a>
+        </li>
+
         <li class="nav-item {{ Request::route()->named('treatmentstypes.index') ? 'active' : '' }}">
             <a class="nav-link {{ Request::route()->named('treatmentstypes.index') ? 'active' : '' }}"
                 href="{{ route('treatments_types.index') }}" wire:navigate>

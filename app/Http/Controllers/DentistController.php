@@ -20,7 +20,7 @@ class DentistController extends Controller
 
     public function store(DentistRequest $request){
         Dentist::create($request->validated());
-        return redirect("dentists.index")->with("success","");
+        return redirect()->route("dentists.index")->with("success","Odontólogo creado");
     }
 
     public function show(string $id){
@@ -36,12 +36,12 @@ class DentistController extends Controller
     public function update(DentistRequest $request, string $id){
         $dentistU = Dentist::findOrFail($id);
         $dentistU->update($request->validated());
-        return redirect("dentists.index")->with("success","");
+        return redirect()->route("dentists.index")->with("success","Perfil de odontólogo actualizado");
     }
 
     public function destroy(string $id){
         $dentistU = Dentist::findOrFail($id);
         $dentistU->delete();
-        return redirect("dentists.index")->with("success","");
+        return redirect()->route("dentists.index")->with("success","Odontólodo eliminado");
     }
 }
