@@ -20,7 +20,7 @@ class PatientController extends Controller
 
     public function store(PatientRequest $request){
         Patient::create($request->validated());
-        return redirect("patients.index")->with("success","");
+        return redirect()->route("patients.index")->with("success","");
     }
 
     public function show(string $id){
@@ -36,12 +36,12 @@ class PatientController extends Controller
     public function update(PatientRequest $request, string $id){
         $patientU = Patient::findOrFail($id);
         $patientU->update($request->validated());
-        return redirect("patients.index")->with("success","");
+        return redirect()->route("patients.index")->with("success","");
     }
 
     public function destroy(string $id){
         $patientU = Patient::findOrFail($id);
         $patientU->delete();
-        return redirect("patients.index")->with("success","");
+        return redirect()->route("patients.index")->with("success","");
     }
 }

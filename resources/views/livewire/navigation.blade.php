@@ -68,6 +68,13 @@
             </a>
         </li>
 
+        <li class="nav-item {{ Request::route()->named('patients.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('patients.index') ? 'active' : '' }}"
+                href="{{ route('patients.index') }}" wire:navigate>
+                <i class="fas fa-user-check text-blue"></i> Pacientes
+            </a>
+        </li>
+
         <li class="nav-item {{ Request::route()->named('treatmentstypes.index') ? 'active' : '' }}">
             <a class="nav-link {{ Request::route()->named('treatmentstypes.index') ? 'active' : '' }}"
                 href="{{ route('treatments_types.index') }}" wire:navigate>
