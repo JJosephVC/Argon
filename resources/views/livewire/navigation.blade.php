@@ -64,21 +64,28 @@
         <li class="nav-item {{ Request::route()->named('dentists.index') ? 'active' : '' }}">
             <a class="nav-link {{ Request::route()->named('dentists.index') ? 'active' : '' }}"
                 href="{{ route('dentists.index') }}" wire:navigate>
-                <i class="fas fa-users text-sky-700"></i> Odontólogos
+                <i class="fas fa-users text-sky-700" style="font-size: 20px; color: grey;"></i> Odontólogos
             </a>
         </li>
 
         <li class="nav-item {{ Request::route()->named('patients.index') ? 'active' : '' }}">
             <a class="nav-link {{ Request::route()->named('patients.index') ? 'active' : '' }}"
                 href="{{ route('patients.index') }}" wire:navigate>
-                <i class="fas fa-user-check text-blue"></i> Pacientes
+                <i class="fas fa-user-check text-blue" style="font-size: 20px; color: darkslateblue;"></i> Pacientes
+            </a>
+        </li>
+
+        <li class="nav-item {{ Request::route()->named('dates.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('dates.index') ? 'active' : '' }}"
+                href="{{ route('dates.index') }}" wire:navigate>
+                <i class="fas fa-calendar" style="font-size: 20px; color: chartreuse;"></i> Citas
             </a>
         </li>
 
         <li class="nav-item {{ Request::route()->named('treatmentstypes.index') ? 'active' : '' }}">
             <a class="nav-link {{ Request::route()->named('treatmentstypes.index') ? 'active' : '' }}"
                 href="{{ route('treatments_types.index') }}" wire:navigate>
-                <i class="fas fa-list-alt text-green"></i> Tipo de tratamientos
+                <i class="fas fa-list-alt" style="font-size: 20px; color: coral;"></i> Tipo de tratamientos
             </a>
         </li>
 

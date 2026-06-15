@@ -22,12 +22,6 @@ class PatientController extends Controller
         Patient::create($request->validated());
         return redirect()->route("patients.index")->with("success","");
     }
-
-    public function show(string $id){
-        $patientS = Patient::findOrFail($id);
-        return view("Patient.show",compact("patientS"));
-    }
-
     public function edit(string $id){
         $patientE = Patient::findOrFail($id);
         return view("Patient.edit",compact("patientE"));

@@ -6,25 +6,28 @@ use App\Http\Requests\DateRequest;
 use App\Models\Date;
 use App\Models\Dentist;
 use App\Models\Patient;
-use App\Models\Treatment_type;
-use Illuminate\Http\Request;
+use App\Models\TreatmentType;
 
 class DateController extends Controller
 {
     public function index(){
         $dateI = Date::with('dentist','patient','treatment_type')->get();
-        return view("Date.index",compact("dateI"));
+        $dateC = new Date();
+        $dentistC = Dentist::all();
+        $patientC = Patient::all();
+        $treatmenttypeC = TreatmentType::all();
+        return view("Date.index",compact("dateI", "dateC", "dentistC", "patientC", "treatmenttypeC"));
     }
     public function create(){
         $dateC = new Date();
-        $dentistC = new Dentist();
-        $patientC = new Patient();
-        $treatmenttypeC = new Treatment_type();
+        $dentistC = Dentist::all();
+        $patientC = Patient::all();
+        $treatmenttypeC = TreatmentType::all();
         return view("Date.create",compact('dateC','dentistC','patientC','treatmenttypeC'));
     }
     public function store(DateRequest $request){
         Date::create($request->validated());
-        return redirect("dates.index")->with("success","Cita creada exitosamente");
+        return redirect()->route("dates.index")->with("success","Cita creada exitosamente");
     }
     public function show(string $id){
         $dateI = Date::with('dentist','patient','treatment_type')->findOrFail($id);
@@ -34,17 +37,17 @@ class DateController extends Controller
         $dateE = Date::findOrFail($id);
         $dentistE = Dentist::all();
         $patientE = Patient::all();
-        $treatmenttypeE = Treatment_type::all();
+        $treatmenttypeE = TreatmentType::all();
         return view("Date.edit",compact('dateE','dentistE','patientE','treatmenttypeE'));
     }
     public function update(DateRequest $request, string $id){
         $dateU = Date::findOrFail($id);
         $dateU->update($request->validated());
-        return redirect("dates.index")->with("success","Cita actualizada");
+        return redirect()->route("dates.index")->with("success","Cita actualizada");
     }
     public function destroy(string $id){
         $dateD = Date::findOrFail($id);
         $dateD->delete();
-        return redirect("dates.index")->with("success","Cita eliminada exitosamente");
+        return redirect()->route("dates.index")->with("success","Cita eliminada exitosamente");
     }
 }

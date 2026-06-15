@@ -27,12 +27,12 @@ class DateRequest extends FormRequest
             'date'=> 'required|date',
             'hour'=> 'required',
             'estimated_duration'=> 'required|integer|min:1',
-            'appoinment_status'=> 'required|in:Programada,Completada, Cancelada',
+            'appoinment_status'=> 'required|in:Programada,Completada,Cancelada',
 
             // Claves foráneas
             'd_dentists_id'=> 'required|exists:dentists,id',
             'd_patients_id'=> 'required|exists:patients,id',
-            'd_treatments_types_id'=> 'required|exists:treatments_types,id',
+            'd_treatments_types_id'=> 'required|exists:treatment_types,id',
         ];
     }
 }
