@@ -5,30 +5,30 @@
     </div>
     <div class="col-md-6 mb-3">
         <strong>Paciente:</strong>
-        <p>{{ optional($treatment->record->patient)->name }} {{ optional($date->record->patient)->surname }}</p>
-    </div>
-    {{-- <div class="col-md-6 mb-3">
-        <strong>Fecha:</strong>
-        <p>{{ $date->date }}</p>
+        <p>{{ optional($treatment->record?->patient)->name }} {{ optional($treatment->record?->patient)->surname }}</p>
     </div>
     <div class="col-md-6 mb-3">
-        <strong>Hora:</strong>
-        <p>{{ $date->hour }}</p>
-    </div>
-    <div class="col-md-6 mb-3">
-        <strong>Odontólogo asignado:</strong>
-        <p>{{ optional($date->dentist)->name }} {{ optional($date->dentist)->surname }}</p>
+        <strong>Historial clinico:</strong>
+        <p>#{{ optional($treatment->record)->id }}</p>
     </div>
     <div class="col-md-6 mb-3">
         <strong>Tipo de tratamiento:</strong>
-        <p>{{ optional($date->treatment_type)->name }}</p>
+        <p>{{ optional($treatment->treatment_type)->name }}</p>
     </div>
     <div class="col-md-6 mb-3">
-        <strong>Duración estimada:</strong>
-        <p>{{ $date->estimated_duration }} minutos</p>
+        <strong>Fecha:</strong>
+        <p>{{ $treatment->date }}</p>
     </div>
     <div class="col-md-6 mb-3">
-        <strong>Estado de la cita:</strong>
-        <p>{{ $date->appoinment_status }}</p>
-    </div> --}}
+        <strong>Estado:</strong>
+        <p>{{ $treatment->status }}</p>
+    </div>
+    <div class="col-md-6 mb-3">
+        <strong>Costo:</strong>
+        <p>{{ $treatment->cost }}</p>
+    </div>
+    <div class="col-md-12 mb-3">
+        <strong>Observaciones:</strong>
+        <p>{{ $treatment->observations }}</p>
+    </div>
 </div>

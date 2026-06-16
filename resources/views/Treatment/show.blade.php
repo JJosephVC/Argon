@@ -11,7 +11,7 @@
                         <a class="btn btn-primary btn-sm" href="{{ route('treatments.index') }}">Volver</a>
                     </div>
                     <div class="card-body bg-white">
-                        @include('Treatment.show-content', ['date' => $dateI])
+                        @include('Treatment.show-content', ['treatment' => $treatmentS])
                     </div>
                 </div>
             </div>

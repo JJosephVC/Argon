@@ -27,9 +27,9 @@
         </div>
 
         <div class="form-group mb-2 mb20">
-            <label for="d_dentists_id" class="form-label">Odont&oacute;logo asignado</label>
+            <label for="d_dentists_id" class="form-label">Odontólogo asignado</label>
             <select name="d_dentists_id" class="form-control" id="d_dentists_id">
-                <option value="">Seleccione un odont&oacute;logo</option>
+                <option value="">Seleccione un odontólogo</option>
                 @foreach ($dentists as $dentist)
                     <option value="{{ $dentist->id }}" @selected(old('d_dentists_id', $date?->d_dentists_id) == $dentist->id)>
                         {{ $dentist->name }} {{ $dentist->surname }}
@@ -53,7 +53,7 @@
         </div>
 
         <div class="form-group mb-2 mb20">
-            <label for="estimated_duration" class="form-label">Duraci&oacute;n estimada</label>
+            <label for="estimated_duration" class="form-label">Duración estimada</label>
             <input type="number" name="estimated_duration" class="form-control" value="{{ old('estimated_duration', $date?->estimated_duration) }}" id="estimated_duration" placeholder="Duracion en minutos" min="1">
             @error('estimated_duration')<div class="text-danger text-red-400">{{ $message }}</div>@enderror
         </div>

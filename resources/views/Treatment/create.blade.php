@@ -15,9 +15,7 @@
 
                             @include('Treatment.form', [
                                 'treatment'=>$treatmentC,
-                                'record'=>$recordC,
-                                'date'=>$dateC,
-                                'patients'=>$patientC,
+                                'records'=>$recordC,
                                 'treatmenttypes'=>$treatmenttypeC
                             ])
                         </form>

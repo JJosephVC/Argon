@@ -22,14 +22,12 @@ class TreatmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date'=> 'required|date',
-            'observations'=> 'nullable|string|min:3|max:255',
-            'status'=> 'required|in:Pendiente,En proceso, Finalizado',
-            'cost'=> 'required|numeric|min:1|max:12',
-
-            // Claves foráneas
-            't_treatments_types_id'=> 'required|exists:treatments_types,id',
-            't_records_id'=> 'required|exists:records,id'
+            'date' => 'required|date',
+            'observations' => 'nullable|string|min:3|max:255',
+            'status' => 'required|in:Pendiente,En proceso,Finalizado',
+            'cost' => 'required|numeric|min:1|max:9999999999.99',
+            't_treatments_types_id' => 'required|exists:treatment_types,id',
+            't_records_id' => 'required|exists:records,id',
         ];
     }
 }

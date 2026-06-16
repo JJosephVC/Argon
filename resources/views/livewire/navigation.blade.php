@@ -68,13 +68,6 @@
             </a>
         </li>
 
-        <li class="nav-item {{ Request::route()->named('records.index') ? 'active' : '' }}">
-            <a class="nav-link {{ Request::route()->named('records.index') ? 'active' : '' }}"
-                href="{{ route('records.index') }}" wire:navigate>
-                <i class="fas fa-users text-sky-700" style="font-size: 20px; color: grey;"></i> Historiales
-            </a>
-        </li>
-
         <li class="nav-item {{ Request::route()->named('patients.index') ? 'active' : '' }}">
             <a class="nav-link {{ Request::route()->named('patients.index') ? 'active' : '' }}"
                 href="{{ route('patients.index') }}" wire:navigate>
@@ -86,6 +79,13 @@
             <a class="nav-link {{ Request::route()->named('dates.index') ? 'active' : '' }}"
                 href="{{ route('dates.index') }}" wire:navigate>
                 <i class="fas fa-calendar" style="font-size: 20px; color: chartreuse;"></i> Citas
+            </a>
+        </li>
+
+        <li class="nav-item {{ Request::route()->named('records.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('records.index') ? 'active' : '' }}"
+                href="{{ route('records.index') }}" wire:navigate>
+                <i class="fas fa-clipboard" style="font-size: 20px; color: rgb(161, 4, 252);"></i> Historiales
             </a>
         </li>
 
@@ -103,7 +103,7 @@
             </a>
         </li>
 
-        <li class="nav-item {{ Request::route()->named('categories.index') ? 'active' : '' }}">
+        {{-- <li class="nav-item {{ Request::route()->named('categories.index') ? 'active' : '' }}">
             <a class="nav-link {{ Request::route()->named('categories.index') ? 'active' : '' }}"
                 href="{{ route('categories.index') }}" wire:navigate>
                 <i class="fas fa-tags text-yellow"></i> Categories (Normal)
@@ -136,6 +136,6 @@
                 href="{{ route('carrers.index') }}" wire:navigate>
                 <i class="fas fa-dove text-orange"></i> Carreras
             </a>
-        </li>
+        </li> --}}
     </ul>
 </div>

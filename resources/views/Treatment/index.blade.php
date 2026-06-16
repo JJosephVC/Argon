@@ -1,5 +1,5 @@
 @extends('layouts.panel')
-@section('title','Treatment/create')
+@section('title','Treatment/Index')
 
 @section('content')
     <div class="container-fluid">
@@ -48,8 +48,8 @@
                                         <tr>
                                             <td></td>
                                             <td>{{ $treatment->id }}</td>
-                                            <td>{{ optional($treatment->record->patient)->name }}</td>
-                                            <td>{{ optional($treatment->record->treatment_type)->name }}</td>
+                                            <td>{{ optional($treatment->record?->patient)->name }} {{ optional($treatment->record?->patient)->surname }}</td>
+                                            <td>{{ optional($treatment->treatment_type)->name }}</td>
                                             <td>{{ $treatment->date }}</td>
                                             <td>{{ $treatment->status }}</td>
                                             <td>{{ $treatment->cost }}</td>
@@ -86,7 +86,7 @@
                 <form method="POST" action="{{ route('treatments.store') }}" role="form" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="createDateModalLabel">Registro de Cita</h5>
+                        <h5 class="modal-title" id="createDateModalLabel">Registro de Tratamiento</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -94,9 +94,7 @@
                     <div class="modal-body">
                             @include('Treatment.form', [
                                 'treatment'=> $treatmentC,
-                                'record'=> $recordC,
-                                'date'=> $dateC,
-                                'patients'=> $patientC,
+                                'records'=> $recordC,
                                 'treatmenttypes'=> $treatmenttypeC
                             ])
                     </div>
@@ -116,11 +114,35 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        @include('Treatment.show-content', ['date' => $date])
+                        @include('Treatment.show-content', ['treatment' => $treatment])
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editDateModal{{ $treatment->id }}" tabindex="-1" role="dialog" aria-labelledby="editDateModalLabel{{ $treatment->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <form method="POST" action="{{ route('treatments.update', $treatment->id) }}" role="form" enctype="multipart/form-data">
+                        {{ method_field('PATCH') }}
+                        @csrf
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editDateModalLabel{{ $treatment->id }}">Editar Tratamiento</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @include('Treatment.form', [
+                                'treatment'=> $treatment,
+                                'records'=> $recordC,
+                                'treatmenttypes'=> $treatmenttypeC
+                            ])
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

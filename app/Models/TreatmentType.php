@@ -17,11 +17,11 @@ class TreatmentType extends Model
     //protected $table = 'treatment_types';
 
     public function treatment() : HasMany{
-        return $this->hasMany(Treatment::class);
+        return $this->hasMany(Treatment::class, 't_treatments_types_id');
     }
 
     public function date() : HasMany{
-        return $this->hasMany(Date::class);
+        return $this->hasMany(Date::class, 'd_treatments_types_id');
     }
 
     public function billing_detail() : HasMany{

@@ -12,7 +12,7 @@ class Treatment extends Model
         'observations',
         'status',
         'cost',
-        't_treatments_type_id',
+        't_treatments_types_id',
         't_records_id'
     ];
 
@@ -21,6 +21,6 @@ class Treatment extends Model
     }
 
     public function treatment_type() : BelongsTo{
-        return $this->belongsTo(TreatmentType::class, 't_treatments_type_id');
+        return $this->belongsTo(TreatmentType::class, 't_treatments_types_id');
     }
 }
