@@ -20,12 +20,6 @@ class PatientController extends Controller
 
     public function store(PatientRequest $request){
         $patient = Patient::create($request->validated());
-
-        $patient->record()->create([
-            'opening_date' => now()->toDateString(),
-            'general_observations' => null,
-        ]);
-
         return redirect()->route("patients.index")->with("success","Paciente registrado con historial clinico");
     }
     public function edit(string $id){
@@ -36,12 +30,6 @@ class PatientController extends Controller
     public function update(PatientRequest $request, string $id){
         $patientU = Patient::findOrFail($id);
         $patientU->update($request->validated());
-
-        $patientU->record()->firstOrCreate([], [
-            'opening_date' => $patientU->created_at?->toDateString() ?? now()->toDateString(),
-            'general_observations' => null,
-        ]);
-
         return redirect()->route("patients.index")->with("success","Paciente actualizado");
     }
 
