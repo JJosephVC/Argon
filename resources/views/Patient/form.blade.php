@@ -42,6 +42,12 @@
         </div>
 
         <div class="form-group mb-2 mb20">
+            <label for="phone_number" class="form-label">Número de teléfono</label>
+            <input type="text" name="phone_number" class="form-control" value="{{ old('phone_number', $patient?->phone_number) }}" id="phone_number" placeholder="Número telefónico">
+            @error('phone_number')<div class="text-danger text-red-400">{{ $message }}</div>@enderror
+        </div>
+
+        <div class="form-group mb-2 mb20">
             <label for="address" class="form-label">Dirección</label>
             <input type="text" name="address" class="form-control" value="{{ old('address', $patient?->address) }}" id="address" placeholder="Dirección">
             @error('address')<div class="text-danger text-red-400">{{ $message }}</div>@enderror

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class RecordRequest extends FormRequest
 {
@@ -21,12 +22,16 @@ class RecordRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'opening_date'=> 'required|date',
-            'general_observations'=> 'nullable|string|min:3',
+        $record = $this->route('record');
 
-            // Clave foránea
-            'r_patients_id'=> 'required|exists:patitents,id'
+        return [
+            'opening_date' => 'required|date',
+            'general_observations' => 'nullable|string|min:3',
+            'r_patients_id' => [
+                'required',
+                'exists:patients,id',
+                Rule::unique('records', 'r_patients_id')->ignore($record),
+            ],
         ];
     }
 }

@@ -17,10 +17,10 @@ class Treatment extends Model
     ];
 
     public function record() : BelongsTo{
-        return $this->belongsTo(Record::class);
+        return $this->belongsTo(Record::class, 't_records_id');
     }
 
     public function treatment_type() : BelongsTo{
-        return $this->belongsTo(TreatmentType::class);
+        return $this->belongsTo(TreatmentType::class, 't_treatments_type_id');
     }
 }

@@ -41,6 +41,7 @@
                                         <th>Fecha de nacimiento</th>
                                         <th>Número de teléfono</th>
                                         <th>Dirección</th>
+                                        <th>Acciones</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -59,6 +60,12 @@
                                         <td>{{ $patient->phone_number }}</td>
                                         <td>{{ $patient->address }}</td>
                                         <td class="flex gap-4">
+                                            @if ($patient->record)
+                                                <a href="{{ route('records.show', $patient->record) }}"
+                                                class="btn btn-sm">
+                                                    <i class="fas fa-notes-medical" style="color: #6f42c1; font-size: 15px;"></i>
+                                                </a>
+                                            @endif
                                             <a href="{{ route('patients.edit', $patient) }}"
                                             class="btn btn-sm">
                                                 <i class="fas fa-pen" style="color: #00ccff; font-size: 15px;"></i>

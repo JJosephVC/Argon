@@ -20,10 +20,10 @@ class Patient extends Model
     ];
 
     public function date() : HasMany{
-        return $this->hasMany(Date::class);
+        return $this->hasMany(Date::class, 'd_patients_id');
     }
 
     public function record() : HasOne{
-        return $this->hasOne(Record::class);
+        return $this->hasOne(Record::class, 'r_patients_id');
     }
 }

@@ -68,6 +68,13 @@
             </a>
         </li>
 
+        <li class="nav-item {{ Request::route()->named('records.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('records.index') ? 'active' : '' }}"
+                href="{{ route('records.index') }}" wire:navigate>
+                <i class="fas fa-users text-sky-700" style="font-size: 20px; color: grey;"></i> Historiales
+            </a>
+        </li>
+
         <li class="nav-item {{ Request::route()->named('patients.index') ? 'active' : '' }}">
             <a class="nav-link {{ Request::route()->named('patients.index') ? 'active' : '' }}"
                 href="{{ route('patients.index') }}" wire:navigate>
@@ -79,6 +86,13 @@
             <a class="nav-link {{ Request::route()->named('dates.index') ? 'active' : '' }}"
                 href="{{ route('dates.index') }}" wire:navigate>
                 <i class="fas fa-calendar" style="font-size: 20px; color: chartreuse;"></i> Citas
+            </a>
+        </li>
+
+        <li class="nanv-item {{ Request::route()->named('treatments.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('treatments.index') ? 'active' : '' }}"
+                href="{{ route('treatments.index') }}" wire:navigate>
+                <i class="fas fa-heartbeat" style="font-size: 20px; color: rgba(228, 21, 21, 0.753);"></i> Tratamientos
             </a>
         </li>
 

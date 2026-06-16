@@ -6,6 +6,7 @@ use App\Http\Requests\TreatmentRequest;
 use App\Models\Record;
 use App\Models\Treatment;
 use App\Models\Treatment_type;
+use App\Models\TreatmentType;
 use Illuminate\Http\Request;
 
 class TreatmentController extends Controller
@@ -16,7 +17,7 @@ class TreatmentController extends Controller
     }
     public function create(){
         $treatmentC = new Treatment();
-        $treatmenttypeC = Treatment_type::all();
+        $treatmenttypeC = TreatmentType::all();
         $recordC = Record::all();
         return view('Record.create', compact('treatmentC','treatmenttypeC','recordC'));
     }
@@ -30,7 +31,7 @@ class TreatmentController extends Controller
     }
     public function edit(string $id){
         $treatmentE = Treatment::findOrFail($id);
-        $treatmenttypeE = Treatment_type::all();
+        $treatmenttypeE = TreatmentType::all();
         $recordE = Record::all();
         return view('Treatment.edit', compact('treatmentE','treatmenttypeE','recordE'));
     }

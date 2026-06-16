@@ -11,15 +11,15 @@ class RecordController extends Controller
 {
     public function index(){
         $recordI = Record::with('patient')->get();
-        return view("Record",compact("recordI"));
+        return view("Record.index",compact("recordI"));
     }
     public function create(){
         $recordC = new Record();
         $patientC = Patient::all();
-        return view('Record.index',compact('recordC','patientC'));
+        return view('Record.create',compact('recordC','patientC'));
     }
     public function store(RecordRequest $request){
-        Record::create($request->all());
+        Record::create($request->validated());
         return redirect()->route('records.index')->with('success','Historial creado');
     }
     public function show(string $id){
@@ -27,7 +27,7 @@ class RecordController extends Controller
         return view('Record.show',compact('recordS'));
     }
     public function edit(string $id){
-        $recordE = Record::findOrFail($id);
+        $recordE = Record::with('patient')->findOrFail($id);
         $patientE = Patient::all();
         return view('Record.edit',compact('recordE','patientE'));
     }

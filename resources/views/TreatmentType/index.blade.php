@@ -37,6 +37,7 @@
 										<th>Descripción</th>
 										<th>Costo base</th>
 										<th>Duración estimada</th>
+                                        <th>Acciones</th>
                                         <th></th>
                                     </tr>
                                 </thead>

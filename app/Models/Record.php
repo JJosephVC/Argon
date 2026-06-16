@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Record extends Model
 {
@@ -13,11 +14,11 @@ class Record extends Model
         'r_patients_id'
     ];
 
-    public function treatment() : BelongsTo{
-        return $this->belongsTo(Treatment::class);
+    public function treatment() : HasMany{
+        return $this->hasMany(Treatment::class, 't_records_id');
     }
 
     public function patient() : BelongsTo{
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(Patient::class, 'r_patients_id');
     }
 }

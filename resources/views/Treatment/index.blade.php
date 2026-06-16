@@ -1,5 +1,5 @@
 @extends('layouts.panel')
-@section('title', 'Date/Index')
+@section('title','Treatment/create')
 
 @section('content')
     <div class="container-fluid">
@@ -8,12 +8,12 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span id="card_title">Citas</span>
+                            <span id="card_title">Tratamientos</span>
 
                             <div class="float-right">
                                 <button type="button" class="fas fa-plus text-white btn btn-primary btn-sm float-right p-3"
                                     data-toggle="modal" data-target="#createDateModal">
-                                    Añadir Cita
+                                    Añadir Tratamiento
                                 </button>
                             </div>
                         </div>
@@ -32,38 +32,36 @@
                                     <tr>
                                         <th></th>
                                         <th>N°</th>
-                                        <th>Fecha</th>
-                                        <th>Hora</th>
                                         <th>Paciente</th>
-                                        <th>Odontólogo asignado</th>
-                                        <th>Duración estimada</th>
-                                        <th>Tipo de tratamiento</th>
-                                        <th>Estado de la cita</th>
+                                        <th>Tratamiento</th>
+                                        <th>Fecha</th>
+                                        <th>Estado</th>
+                                        <th>Costo</th>
+                                        <th>Observaciones</th>
                                         <th>Acciones</th>
                                         <th></th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($dateI as $date)
+                                    @foreach ($treatmentI as $treatment)
                                         <tr>
                                             <td></td>
-                                            <td>{{ $date->id }}</td>
-                                            <td>{{ $date->date }}</td>
-                                            <td>{{ $date->hour }}</td>
-                                            <td>{{ optional($date->patient)->name }}</td>
-                                            <td>{{ optional($date->dentist)->name }}</td>
-                                            <td>{{ $date->estimated_duration }}</td>
-                                            <td>{{ optional($date->treatment_type)->name }}</td>
-                                            <td>{{ $date->appoinment_status }}</td>
+                                            <td>{{ $treatment->id }}</td>
+                                            <td>{{ optional($treatment->record->patient)->name }}</td>
+                                            <td>{{ optional($treatment->record->treatment_type)->name }}</td>
+                                            <td>{{ $treatment->date }}</td>
+                                            <td>{{ $treatment->status }}</td>
+                                            <td>{{ $treatment->cost }}</td>
+                                            <td>{{ $treatment->observations }}</td>
                                             <td class="flex gap-4">
-                                                <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#showDateModal{{ $date->id }}">
+                                                <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#showDateModal{{ $treatment->id }}">
                                                     <i class="fas fa-eye" style="color: #002FFA; font-size: 15px;"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#editDateModal{{ $date->id }}">
+                                                <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#editDateModal{{ $treatment->id }}">
                                                     <i class="fas fa-pen" style="color: #1AFF00; font-size: 15px;"></i>
                                                 </button>
-                                                <form action="{{ route('dates.destroy', $date) }}" method="POST" class="d-inline">
+                                                <form action="{{ route('treatments.destroy', $treatment) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm">
@@ -82,14 +80,10 @@
         </div>
     </div>
 
-    <!Creación de Modal o Ventana flotante
-    cuya fase pasa de estar oculta a ser mostrada una vez se selecciona un boton
-    y pasa la información que está en el form adaptandola al espacio de la modal
-    -->
     <div class="modal fade" id="createDateModal" tabindex="-1" role="dialog" aria-labelledby="createDateModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form method="POST" action="{{ route('dates.store') }}" role="form" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('treatments.store') }}" role="form" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="createDateModalLabel">Registro de Cita</h5>
@@ -98,59 +92,35 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        @include('Date.form', [
-                            'date' => $dateC,
-                            'dentists' => $dentistC,
-                            'patients' => $patientC,
-                            'treatmenttypes' => $treatmenttypeC
-                        ])
+                            @include('Treatment.form', [
+                                'treatment'=> $treatmentC,
+                                'record'=> $recordC,
+                                'date'=> $dateC,
+                                'patients'=> $patientC,
+                                'treatmenttypes'=> $treatmenttypeC
+                            ])
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    @foreach ($dateI as $date)
-        <div class="modal fade" id="showDateModal{{ $date->id }}" tabindex="-1" role="dialog" aria-labelledby="showDateModalLabel{{ $date->id }}" aria-hidden="true">
+    @foreach ($treatmentI as $treatment)
+        <div class="modal fade" id="showDateModal{{ $treatment->id }}" tabindex="-1" role="dialog" aria-labelledby="showDateModalLabel{{ $treatment->id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="showDateModalLabel{{ $date->id }}">Detalle de Cita</h5>
+                        <h5 class="modal-title" id="showDateModalLabel{{ $treatment->id }}">Detalle de tratamiento</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        @include('Date.show-content', ['date' => $date])
+                        @include('Treatment.show-content', ['date' => $date])
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="editDateModal{{ $date->id }}" tabindex="-1" role="dialog" aria-labelledby="editDateModalLabel{{ $date->id }}" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <form method="POST" action="{{ route('dates.update', $date->id) }}" role="form" enctype="multipart/form-data">
-                        {{ method_field('PATCH') }}
-                        @csrf
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editDateModalLabel{{ $date->id }}">Editar Cita</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            @include('Date.form', [
-                                'date' => $date,
-                                'dentists' => $dentistC,
-                                'patients' => $patientC,
-                                'treatmenttypes' => $treatmenttypeC
-                            ])
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>

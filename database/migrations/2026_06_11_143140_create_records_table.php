@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('opening_date');
             $table->text('general_observations')->nullable();
 
-            $table->foreignId('r_patients_id')->constrained('patients')
+            $table->foreignId('r_patients_id')->unique()->constrained('patients')
             ->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

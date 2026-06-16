@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class PatientController extends Controller
 {
     public function index(){
-        $patientI = Patient::all();
+        $patientI = Patient::with('record')->get();
         return view("Patient.index",compact("patientI"));
     }
 
@@ -19,8 +19,14 @@ class PatientController extends Controller
     }
 
     public function store(PatientRequest $request){
-        Patient::create($request->validated());
-        return redirect()->route("patients.index")->with("success","");
+        $patient = Patient::create($request->validated());
+
+        $patient->record()->create([
+            'opening_date' => now()->toDateString(),
+            'general_observations' => null,
+        ]);
+
+        return redirect()->route("patients.index")->with("success","Paciente registrado con historial clinico");
     }
     public function edit(string $id){
         $patientE = Patient::findOrFail($id);
@@ -30,7 +36,13 @@ class PatientController extends Controller
     public function update(PatientRequest $request, string $id){
         $patientU = Patient::findOrFail($id);
         $patientU->update($request->validated());
-        return redirect()->route("patients.index")->with("success","");
+
+        $patientU->record()->firstOrCreate([], [
+            'opening_date' => $patientU->created_at?->toDateString() ?? now()->toDateString(),
+            'general_observations' => null,
+        ]);
+
+        return redirect()->route("patients.index")->with("success","Paciente actualizado");
     }
 
     public function destroy(string $id){

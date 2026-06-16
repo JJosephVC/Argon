@@ -40,7 +40,7 @@
 										<th>Número de teléfono</th>
                                         <th>Descripción profesional</th>
                                         <th>Especialidad</th>
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
 
